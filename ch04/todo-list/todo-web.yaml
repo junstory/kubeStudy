@@ -29,3 +29,5 @@ spec:
           env:
           - name: Logging__LogLevel__Default
             value: Warning
+          - name: test
+            value: tmp

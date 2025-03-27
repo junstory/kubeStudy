@@ -1,19 +1,18 @@
 # 디플로이먼트는 API 버전 1 에 속한다
-apiVersion: apps/v1  #deployment는 apps/v1에 속하는 것에 주의. pod는 v1에 속함
+apiVersion: apps/v1
 kind: Deployment
 
 # 디플로이먼트의 이름을 정해야 한다
 metadata:
-  name: whoami-deployment
-  labels:
-    environment: prod
+  name: hello-kiamol-4
+
 # 디플로이먼트가 자신의 관리 대상을 결정하는
 # 레이블 셀렉터가 정의된다
 # 여기에서는 app 레이블을 사용하는데 , 레이블은 임의의 키- 값 쌍이다
 spec:
-  selector:
+  selector: 
     matchLabels:
-      app: whoami
+      app: hello-kiamol-4
 
   #이 템플릿은 디플로이먼트가 파드를 만들 때 쓰인다
   template:
@@ -21,10 +20,10 @@ spec:
   # 그 대신 레이블 셀렉터와 일치하는 레이블을 지정해야 한다
     metadata:
       labels:
-        app: whoami
+        app: hello-kiamol-4
 
     # 파드의 정의에는 컨테이너 이름과 이미지 이름을 지정한다
     spec:
       containers:
         - name: web
-          image: kiamol/ch02-whoami
+          image: kiamol/ch02-hello-kiamol
