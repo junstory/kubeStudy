@@ -19,5 +19,15 @@ spec:
           mountPath: /nginx2/
         - name: nginx3
           mountPath: /nginx3/
+  volumes:
+    - name: nginx1
+      persistentVolumeClaim:
+        claimName: logs-nginx-stateful-0
+    - name: nginx2
+      persistentVolumeClaim:
+        claimName: logs-nginx-stateful-1
+    - name: nginx3
+      persistentVolumeClaim:
+        claimName: logs-nginx-stateful-2
   # volumes:
   # ?

@@ -1,0 +1,36 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sleep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sleep
+  template:
+    metadata:
+      labels:
+        app: sleep
+    spec:
+      containers:
+      - name: sleep
+        image: kiamol/ch03-sleep
+      - name: server
+        image: kiamol/ch03-sleep
+        command: ["sh","-c","while true; do echo -e 'HTTP/1.1 200 OK\r\n\r\nHello'; sleep 1; done"]
+        ports:
+        - containerPort: 8080
+---
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sleep-server-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: sleep-server
+  ports:
+  - port: 8020         # 외부에 노출할 포트
+    targetPort: 8080   # Pod 내 컨테이너가 듣고 있는 포트

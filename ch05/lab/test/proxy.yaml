@@ -71,23 +71,7 @@ spec:
             - name: config
               mountPath: "/etc/nginx/"
               readOnly: true
-            - name: cache-volume
-              mountPath: /data/nginx/cache
       volumes:
         - name: config
           configMap:
             name: todo-proxy-lab-configmap
-        - name: cache-volume
-          persistentVolumeClaim:
-            claimName: todo-proxy-lab-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: todo-proxy-lab-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
